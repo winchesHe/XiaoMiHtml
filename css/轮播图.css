@@ -1,0 +1,477 @@
+/* 设置一个布局宽度 */
+.w{
+    width: 100%;
+    background-color: #333;
+    height: 40px;
+    line-height: 40px
+}
+/* 设置字体颜色 */
+.top ul,.top ul>li>a{
+    color: #b0b0b0;
+    font-size: 12px;
+}
+/* 设置左侧导航浮动 */
+.top-left{
+    float: left;
+}
+/* 设置右侧的宽度 */
+.top-right{
+    width: 124px;
+    position: relative;
+}
+/* 设置右，中侧导航浮动 */
+.top-middle,.top-right{
+    float: right;
+}
+/* 设置元素浮动排列 */
+.w li{
+    float: left;
+}
+/* 设置超链接填满块元素 */
+.w li>a{
+    display: block;
+}
+/* 设置间距 */
+.w .line{
+    margin: 0 8px;
+}
+/* 设置右侧购物车样式 */
+.top-right li>a{
+    width: 120px;
+    margin-left: 25px;
+    background-color: #424242;
+    text-align: center;
+}
+.top-right i{
+    margin-right: 3px;
+}
+/* 设置鼠标移入样式 */
+.w li>a:hover{
+    color: #fff;
+}
+/* 设置右侧购物车鼠标移入样式 */
+.top-right li>a:hover{
+    background-color: #fff;
+    color:#ff6700;
+}
+/* 设置下拉App */
+    .app{
+    /* display: none; */
+    position: absolute;
+    width: 124px;
+    /* 高度设为0设置过渡动画溢出的元素裁剪 */
+    height: 0px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    /* 因为子元素继承了父元素的行高所以span被挤下去了 */
+    line-height: 0;
+    left: -40px;
+    /* 利用transition设置过渡效果 */
+    transition: height 1s;
+    z-index: 2;
+    background-color: #fff;
+}
+/* 设置下拉图片 */
+.app img{
+    width: 90px;
+    margin: 17px;
+    margin-top: 12px;
+}
+/* 设置下拉字体 */
+.app span{
+    display: block;
+    width: 124px;
+    color: #000;
+    text-align: center;
+    margin-top: -4px;
+}
+/* 设置下拉三角 */
+    .triangle-1::after{
+    display: none;
+    /* 解决继承的样式问题 */
+    width: 0;
+    position: absolute;
+    content: "";
+    border:8px solid transparent;
+    border-bottom-color:#fff;
+    /* 利用定位元素水平居中 */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+}
+/* 令下载app父元素定位 */
+.triangle{
+    position: relative;
+}
+/* 设置鼠标移入二维码跟小三角显示 */
+.triangle:hover .app,
+.triangle-1:hover.triangle-1::after{
+    /* 当高度恢复时元素恢复 */
+    display:block;
+    height: 130px;
+}
+/* 设置右侧购物车下拉内容 */
+.top-right-container{
+    position: absolute;
+    z-index: 2222;
+    width: 316px;
+    height: 0px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    left: -171px;
+    right: 0;
+    top: 40px;
+    bottom: 0;
+    transition: height 1s;
+}
+.top-right-content{
+    position: absolute;
+    padding: 0 20px;
+    margin: 30px 40px;
+    font-size: 13px;
+    color: #424242;
+}
+.top-right:hover .top-right-container{
+    position: absolute;
+    height: 100px;
+}
+
+/* 设置头部导航条 */
+/* 设置容器的宽度 */
+.safari{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    /* background-color: orange; */
+}
+.safari-content{
+    width: 1226px;
+    height: 100px;
+    margin: 0 auto;
+}
+/* 设置左部logo */
+.logo{
+    width: 55px;
+    height: 55px;
+    float: left;
+    position: relative;
+    margin-top: 22px;
+    overflow: hidden;
+    /* 将检索文字向上隐藏 */
+    text-indent: -1000px;
+}
+/* 设置logo1 */
+.logo .mi1{
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background-color: #ff6700;
+    background-image: url(../img/logo-mi1.png);
+    /* 让背景在元素里居中 */
+    background-position: center;
+    left: -55px;
+    transition: left .5s;
+}
+/* 设置logo2 */
+.logo .mi2{
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    left: 0;
+    background-color: #fff;
+    background-image: url(../img/logo-mi2.png);
+    /* 让背景在元素里居中 */
+    background-position: center;
+    background-size: 55px;
+    transition: left .5s;
+}
+.logo:hover .mi2{
+    left: 55px;
+}
+.logo:hover .mi1{
+    left: 0px;
+}
+/* 设置中部导航条样式 */
+.safari-content-middle li{
+    float: left;
+    height: 100px;
+    margin-right: 20px;
+    font-size: 16px;
+}
+.safari-content-middle{
+    float: left;
+    width:792px ;
+    padding-left: 58px;
+    line-height: 100px;
+    /* background-color: #bfa; */
+    margin-left: 7px;
+}
+.safari-content-middle li>a{
+    display: block;
+    color: #333;
+}
+.safari-content-middle li>a:hover{
+    color: #ff6700;
+}
+/* 做中部下拉框样式 */
+/* 用兄弟选择器同级的时候 */
+.safari-content-middle .show-only:hover ~ .show,
+.show:hover{
+    height: 230px;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+}
+.show{
+    position: absolute;
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    left: 0;
+    top: 100px;
+    /* border-top: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3); */
+    transition: height 1s;
+    z-index: 22;
+    background-color: #fff;
+}
+/* 隐藏商品分类 */
+.show-all>a{
+    visibility: hidden;
+}
+
+/* 设置右侧搜索框 */
+.safari-content-right{
+    float: right;
+}
+.search{
+    margin-top: 20px;
+    width: 294px;
+    height: 50px;
+    float: left;
+    background-color: #bfa;
+}
+.search-btn{
+    background-color: #fff;
+    float: left;
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgb(224, 224, 224);
+    border-left: none;
+    font-size: 16px;
+}
+.search-inp{
+    padding: 0 10px;
+    float: left;
+    box-sizing: border-box;
+    width: 244px;
+    height: 50px;
+    border: 1px solid rgb(224, 224, 224);
+}
+.search-btn:hover{
+    border: none;
+    background-color: #ff6700;
+}
+/* 设置鼠标点击边框样式 */
+.search-inp:focus,
+.search-inp:focus + .search-btn{
+    outline: 1px solid #ff6700
+}
+/* 设置左侧导航 */
+.show-all{
+    position: relative;
+}
+.flog{
+    position: absolute;
+    left: -120px;
+    width: 234px;
+    height: 420px;
+    padding: 20px 0;
+    line-height: 1;
+    background-color: rgba(105,101,101,.6);
+    z-index: 1;
+}
+.flog a{
+    display: block;
+    height: 42px;
+    line-height: 42px;
+    color: #fff;
+    padding:0 20px;
+}
+.flog a>i{
+    float: right;
+    line-height: 42px;
+}
+.flog a:hover{
+    background-color: #ff6700;
+}
+
+/* 设置中部banner样式 */
+.banner{
+    width: 1226px;
+    margin: 0 auto;
+    height: 460px;
+    background-color: #bfa;
+    position: relative;
+    overflow: hidden;
+}
+#screen{
+    position: absolute;
+    /* overflow: hidden; */
+    /* width: 8000px; */
+    /* left: -1226px; */
+}
+.img-fa{
+    float: left;
+}
+.banner .img{
+    /* display: block; */
+    
+    width: 1226px;
+    height: 460px;
+    /* background-image: url(../img/banner1.jpg); */
+    /* background-size: 100% 100%; */
+}
+/* 设置小圆点 */
+.point-contain{
+    position: absolute;
+    right: 42px;
+    bottom: 20px;
+}
+.point{
+    float: left;
+    width: 6px;
+    height: 6px;
+    background: rgba(0,0,0,.4);
+    border: 2px solid #fff;
+    border-color: hsla(0,0%,100%,.3);
+    border-radius: 10px;
+    margin-left: 4px;
+}
+.xuanzhong,.point-contain a:hover{ 
+    background: hsla(0,0%,100%,.4);
+    border-color: rgba(0,0,0,.4);
+}
+/* 创建一个轮播图的类 */
+.pre{
+    position: absolute;
+    width: 41px;
+    height: 69px;
+    /* background-color: red; */
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    right: 0;
+    background-image: url(../img/icon-slides.png);
+    background-position: 41px 0px;
+}
+.next{
+    position: absolute;
+    width: 41px;
+    height: 69px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    left: 234px;
+    background-image: url(../img/icon-slides.png);
+    background-position: 82px 0px;
+}
+.pre:hover{
+    background-position: -44px 0px;
+}
+.next:hover{
+    background-position: 0px 0px;
+}
+
+/* 设置右侧工具栏 */
+.tool{
+    position: fixed;
+    width: 84px;
+    height: 455px;
+    /* 这是为了使其固定在右侧不会随窗口而变化 */
+    /* right: 50%;
+    margin-right: -696px; */
+    right: 0;
+    margin-top: -400px;
+}
+.tool div{
+    width: 82px;
+    height: 90px;
+    border: 1px solid #f5f5f5;
+}
+.tool img{
+    width: 30px;
+    height: 30px;
+    margin:18px;
+    margin-left: 28px;
+    margin-top: 22px;
+    margin-bottom: 4px;
+}
+.tool span{
+    color: #000;
+    font-size: 12px;
+    margin-left: 16px;
+}
+.tool-main5 span{
+    margin-left: 24px;
+}
+.tool div:hover span{
+    color: #ff6700;
+}
+
+/* 设置底部广告 */
+.inf,.inf li{
+    float: left;
+}
+.inf-wrapper{
+    position: relative;
+    margin-top: 18px;
+}
+.inf{
+    position: absolute;
+    width: 228px;
+    height: 168px;
+    background-color: #5f5750;
+    padding: 0 3px;
+}
+.inf a{
+    display: block;
+    color: #fff;
+    opacity: .7;
+    width: 70px;
+    height: 72px;
+    margin-right: 6px;
+    padding: 6px 0;
+    font-size: 12px;
+    /* 设置居中，可以用text-align：设置文本的居中 */
+}
+.inf a:hover{
+    color: #fff;
+    opacity: 1;
+}
+.inf i{
+    width: 15px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+.inf li{
+    width: 70px;
+    height: 82px;
+    padding-left: 6px;
+}
+.inf span{
+    margin-left: 13px;
+}
+.inf-right a{
+    width: 316px;
+    height: 170px;
+    margin-left: 18px;
+    float: right;
+}
+.inf-right img{
+    width: 100%;
+}
