@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+    }
+
+    body {
+      background-image: url(./image/背景.webp);
+      background-repeat: repeat;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 20px;
+      height: 25px;
+      line-height: 25px;
+    }
+
+    #head-left {
+      display: flex;
+      width: 30%;
+      justify-content: space-around;
+    }
+
+    #head-left div:hover {
+      color: #4e6ef2;
+    }
+
+    #head-right {
+      width: 10%;
+      display: flex;
+      justify-content: space-around;
+      cursor: pointer;
+    }
+
+    #head-right #id9:hover {
+      color: #4e6ef2;
+    }
+
+    #id10 {
+      box-sizing: border-box;
+      background-color: #4e6ef2;
+      width: 60px;
+      height: 25px;
+      line-height: 25px;
+      color: #fff;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      /* height: 30vh; */
+      align-items: center;
+      justify-content: center;
+    }
+
+    #baidu-icon {
+      cursor: pointer;
+    }
+
+    #search {
+      display: flex;
+      align-items: center;
+    }
+
+    #kw {
+      width: 650px;
+      height: 40px;
+      border-radius: 10px;
+      border: 2px solid #c4c7ce;
+      background: #fff;
+      color: #222;
+    }
+
+    #kw:focus {
+      /* outline: 1px #4662d9 solid; */
+    }
+
+    #kw:hover {
+      border-color: #a7aab5;
+    }
+
+    #icon-container {
+      margin-left: -132px;
+    }
+
+    .icon {
+      position: relative;
+      left: -10px;
+      height: 20px;
+      width: 24px;
+      background: #fff url(https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/searchbox/nicon-10750f3f7d.png) no-repeat;
+      background-position: 0 -51px;
+    }
+
+    .btn {
+      cursor: pointer;
+      width: 108px;
+      height: 44px;
+      line-height: 45px;
+      line-height: 44px\9;
+      padding: 0;
+      background: 0 0;
+      background-color: #4e6ef2;
+      border-radius: 0 10px 10px 0;
+      font-size: 17px;
+      color: #fff;
+      box-shadow: none;
+      font-weight: 400;
+      border: none;
+      outline: 0;
+      margin-left: 0px;
+    }
+
+    .btn:hover {
+      background-color: #4662d9;
+    }
+
+    #navigate {
+      margin-top: 40px;
+    }
+
+    .undertips-link {
+      cursor: pointer;
+      color: #53A1FC;
+      line-height: 33px;
+      height: 32px;
+      display: inline-block;
+      padding: 0 15px;
+      margin: 0 auto;
+      font: 16px/26px Arial, sans-serif;
+    }
+
+    .undertips-link-lefticon {
+      display: inline-block;
+      margin-top: 0;
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+    }
+
+    .undertips-link-text {
+      vertical-align: top;
+      font-size: 16px;
+    }
+
+    .undertips-link-text:hover {
+      text-decoration: underline;
+      color: #4662d9;
+    }
+
+    .undertips-link-righticon {
+      width: 18px;
+      height: 18px;
+      margin-left: 8px;
+      vertical-align: top;
+      margin-top: 4px;
+    }
+
+    .c-text {
+      display: inline-block;
+      padding: 0 2px;
+      text-align: center;
+      vertical-align: middle;
+      font-style: normal;
+      color: #fff;
+      overflow: hidden;
+      line-height: 16px;
+      height: 16px;
+      font-size: 12px;
+      border-radius: 4px;
+      font-weight: 200;
+    }
+
+    .c-text-hot {
+      background-color: #f60;
+    }
+
+    #mid-container {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+    }
+
+    #resou-container div:hover {
+      color: #4662d9;
+    }
+
+    #resou-container {
+      width: 650px;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #mid-bottom {
+      margin-top: 20px;
+      width: 650px;
+      flex-wrap: wrap;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #mid-bottom div {
+      width: 300px;
+      height: 40px;
+    }
+
+    .s-hotsearch-wrapper .s-hotsearch-content .title-content .title-content-index {
+      margin-right: 4px;
+      width: 22px;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      line-height: 18px;
+      position: relative;
+      top: 1px;
+    }
+
+    .c-index-single-hot3 {
+      color: #faa90e;
+    }
+
+    .c-index-single {
+      display: inline-block;
+      background: 0 0;
+      color: #9195a3;
+      width: 18px;
+      font-size: 15px;
+      letter-spacing: -1px;
+    }
+
+    #bottom-container div:hover {
+      color: #4662d9;
+      text-decoration: underline;
+    }
+
+    .s-hotsearch-wrapper .s-hotsearch-content .title-content-mark {
+      margin-left: 6px;
+      position: relative;
+      top: -2px;
+    }
+
+    .c-text-new {
+      background-color: #ff455b;
+    }
+
+    .c-text {
+      display: inline-block;
+      padding: 0 2px;
+      text-align: center;
+      vertical-align: middle;
+      font-style: normal;
+      color: #fff;
+      overflow: hidden;
+      line-height: 16px;
+      height: 16px;
+      font-size: 12px;
+      border-radius: 4px;
+      font-weight: 200;
+    }
+  </style>
+  <style>
+    footer {
+      position: absolute;
+      bottom: 0;
+      width: 100vw;
+      font-size: 12px;
+    }
+
+    footer div {
+      text-align: center;
+      color: #bbb;
+      cursor: pointer;
+    }
+
+    .con1,
+    .con2 {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.105);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0.5;
+    }
+
+    .con2 {}
+
+    .img1:hover {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
+
+    .img2:hover {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div id="head-left">
+      <div id="id1">新闻</div>
+      <div id="id2">hao123</div>
+      <div id="id3">地图</div>
+      <div id="id4">贴吧</div>
+      <div id="id5">视频</div>
+      <div id="id6">图片</div>
+      <div id="id7">网盘</div>
+      <div id="id8">更多</div>
+    </div>
+    <div id="head-right">
+      <div id="id9">设置</div>
+      <div id="id10"><span>登录</span></div>
+    </div>
+  </header>
+  <container>
+    <img id="baidu-icon" src="//www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png" width="270" height="129"
+      onerror="this.src='//www.baidu.com/img/flexible/logo/pc/index@2.png';this.onerror=null;">
+    <div id="search">
+      <input id="kw" name="wd" class="s_ipt" value="" maxlength="255" autocomplete="off">
+      <div id="icon-container">
+        <div class="icon"></div>
+      </div>
+      <button class="btn">百度一下</button>
+    </div>
+    <div id="navigate">
+      <a class="undertips-link"
+        href="https://www.baidu.com/s?ie=UTF-8&amp;wd=%E9%AB%98%E8%80%83&amp;rsv_dl=GK_PC_2022_index_tips"
+        target="_blank"><img class="undertips-link-lefticon"
+          src="data:image/png;base64,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"><span
+          class="undertips-link-text">高考上百度，一站式智能报考！</span><img class="undertips-link-righticon"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAMAAADW3miqAAAAUVBMVEUAAABSofxUov1TpP1wv/9Uov5TovxXpP9Tof1Uov1Tov5apf9Tof1Tov1To/1Uov1Uo/1Xov9So/9Uov1Uov1UovxTovxSoftSoPtXpP9Tof2YKD5zAAAAGnRSTlMAUUkWBUQyI+NNGwvyoIpwVywQ6NvLuEE7OOroRv4AAAC9SURBVDjLzdPZCoQwDAVQu7nVfZ/8/4cOl8GOqUL0zbwFjhhuk+SdpfO8O/ZG6/KEciJqjx8ppbIrRA1Hqo9QQaja7n2pUGmkXAW1+DBUAbVZrtIRajZ7P2ioNVLZBDWFcb2Dcp4rM0ONYRC7QumBK79AVS6oDaowXNmaUN1/UIWKY22IWKw90CnWlnismbqKtfvFmtyJ9ZPwWIfHSP6dPLgcgRym/CzyAz9dFXnp5PWVD0E+Kfk45TN/fX0BUq8S0cm/v18AAAAASUVORK5CYII="></a>
+    </div>
+    <div id="mid-container">
+      <div id="resou-container">
+        <div id="resou">百度热搜<span class="title-content-mark ie-vertical c-text c-gap-left-small c-text-new">New</span>
+        </div>
+        <div id="change">换一批😀</div>
+      </div>
+      <div id="mid-bottom">
+        <div id="bottom-container">
+          <div id="text"><span
+              class="title-content-index c-index-single c-index-single-hot3">TP</span>消防员让群众踩直接肩上转移<span
+              class="title-content-mark ie-vertical c-text c-gap-left-small c-text-hot">热</span></div>
+        </div>
+        <div id="bottom-container">
+          <div id="text"><span class="title-content-index c-index-single c-index-single-hot3">3</span>香港警察训练中式步操<span
+              class="title-content-mark ie-vertical c-text c-gap-left-small c-text-hot">热</span></div>
+        </div>
+        <div id="bottom-container">
+          <div id="text"><span
+              class="title-content-index c-index-single c-index-single-hot3">1</span>警方：唐山被打女子为轻伤或轻微伤<span
+              class="title-content-mark ie-vertical c-text c-gap-left-small c-text-new">热</span></div>
+        </div>
+        <div id="bottom-container">
+          <div id="text"><span
+              class="title-content-index c-index-single c-index-single-hot3">4</span>为何看起来严重却是轻伤？警方科普<span
+              class="title-content-mark ie-vertical c-text c-gap-left-small c-text-new">热</span></div>
+        </div>
+        <div id="bottom-container">
+          <div id="text"><span
+              class="title-content-index c-index-single c-index-single-hot3">2</span>曾称5分钟出境的唐山民警被查<span
+              class="title-content-mark ie-vertical c-text c-gap-left-small c-text-hot">爆</span></div>
+        </div>
+        <div id="bottom-container">
+          <div id="text"><span class="title-content-index c-index-single c-index-single-hot3">5</span>张志军案被害者家属发声<span
+              class="title-content-mark ie-vertical c-text c-gap-left-small c-text-new">新</span></div>
+        </div>
+      </div>
+    </div>
+  </container>
+  <footer>
+    <div>关于百度About
+      Baidu京公网安备11000002000001号京ICP证030173号药品医疗器械网络信息服务备案（京）网药械信息备字（2021）第00159号医疗器械网络交易服务第三方平台备案凭证（京）网械平台备字（2020）第00002号
+    </div>
+  </footer>
+  <aside>
+    <div class="con1"><img class="img1"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAA7VBMVEUAAAD////////s8v////+txP+qwv+4zf/w9f/2+P+hu//Q3f+yyP+4zf/Q3f////+kvv+90P+80f+2yv/S4P/T4P/M2//z9/+cuP/V4P9Whv////9Uhf9Sg/9Pgf9NgP/8/f9di/9Xh/9lkf5aif9qlP7z9//k7P/c5v+2y/94nv51nP6lv/+LrP6Ep/6BpP5gjf7v9P+wxv/U4f/M2/+sxP+vxv73+f/P3v/J2v+5zf+ivP+fuv9xmf+Ytv6Usv6Hqf58of5vl/7m7v/g6f+zyf6QsP75+//q8P/B0v/W4//C1P6+0P6qwv6ct/76fHZiAAAAGnRSTlMAGAaVR/Py45aC9Mfy2b8t9OPZ2ce/v4L0x/e74/EAAAIZSURBVDjLZVPXYuIwEDSmQ4BLv5O0ku3Yhwu2IZTQe0hy7f8/57QSoYR5sVea1c424wgzl324LRRuH7I507hEJluYucCFEOBGhWzmy7X5+N0WwIjTbrcdBsKulM0z96onGCGE2X6n+cTkj/CqJ480igzkNXp26E9JkABSbBz8i4Bn3EkH840mKHoxs49fZQzt2Kd03FQEzSB3WsejB9Jqf1CJQBM0wCurABWBoub0gkDENwyStTHA62pwSWDtklRQ4FLfjnaiPqVW60hAYeLKNHIREOZuKTL80H6XBFCwn4BAmDOyLiOQUIlOSEjaoS+Ju57NZuul73Fml4w6yAivSLBW3MGfcfBmIegmArg3alICdJHgy1jQt8Z/6CcC4DdGXhLIoiWRACpbLYbDYW80GnXp2GH8ShP+PUvEoHsAIFq9Xm8+kXlIwkkI9pm+05Tm3yWqu9EiB0pkwjWBx2i+tND1XqeZqpPU4VhUbq/ekR8CwTRVoRxf3ifTbeIwcONNsJZ2lxFVKDMv1KNvS2zXdrnD+COvR1PQpTZKNlKD3cLCOJNnivgVxkw169BunlKFaV9/B+LQbqOsByY4IVgDB59dl/cjR9TIJV1Lh7CGqUqH/DDPhhZYOPkdLz6m0X7GrzPHsSe6zJwzxvm+5NeNi8U5ABfn7mz7zHJFrZ6+BY6rd7m8kQtcAtwwXzq4n69/vZbP1+pn6/8fsrRmHUhmpYYAAAAASUVORK5CYII="
+        alt=""></div>
+    <div class="con2"><img class="img2"
+        src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/qrcode/qrcode@2x-daf987ad02.png" alt="">
+    </div>
+  </aside>
+</body>
+
+</html>
