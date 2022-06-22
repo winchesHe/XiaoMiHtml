@@ -39,13 +39,21 @@
     }
 
     #head-right {
-      width: 10%;
+      width: 25%;
       display: flex;
       justify-content: space-around;
       cursor: pointer;
+      line-height: 25px;
+      align-items: center;
+    }
+    #head-right div, #head-right img {
+      margin: 0 5px;
     }
 
-    #head-right #id9:hover {
+    /* #head-right #id9:hover {
+      color: #4e6ef2;
+    } */
+    #head-right div:hover {
       color: #4e6ef2;
     }
 
@@ -285,7 +293,7 @@
       position: absolute;
       bottom: 0;
       width: 100vw;
-      font-size: 12px;
+      font-size: 13px;
     }
 
     footer div {
@@ -319,6 +327,34 @@
       height: 55px;
       border-radius: 50%;
     }
+
+    .weather-icon {
+      width: 23px;
+      height: 23px;
+      display: inline-block;
+      background-size: 100% 100%;
+      margin-right: 4px;
+    }
+
+    .show-polution-name {
+      background-color: #40c057;
+      border-radius: 9px;
+      width: 30px;
+      color: #fff;
+      font-size: 12px;
+      display: inline-block;
+      height: 16px;
+      line-height: 16px;
+      text-align: center;
+    }
+
+    .touxiang {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: #53A1FC 2px solid;
+      padding: 3px;
+    }
   </style>
 </head>
 
@@ -335,8 +371,16 @@
       <div id="id8">更多</div>
     </div>
     <div id="head-right">
-      <div id="id9">设置</div>
-      <div id="id10"><span>登录</span></div>
+      <!-- <div id="id9">设置</div>
+      <div id="id10"><span>登录</span></div> -->
+      <div>湛江</div>
+      <img class="weather-icon"
+           src="https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/weather/icons/a1.png">
+      <span>29°C</span>
+      <div><span class="show-polution-name">优</span></div>
+      <div class="shezhi">设置</div>
+      <img class="touxiang" src="./image/touxiang.jpg" alt="">
+      <div>小小鳄鱼崽</div>
     </div>
   </header>
   <container>
@@ -396,8 +440,9 @@
     </div>
   </container>
   <footer>
-    <div>关于百度About
-      Baidu京公网安备11000002000001号京ICP证030173号药品医疗器械网络信息服务备案（京）网药械信息备字（2021）第00159号医疗器械网络交易服务第三方平台备案凭证（京）网械平台备字（2020）第00002号
+    <div>关于百度 About
+      Baidu 京公网安备11000002000001号 京ICP证030173号 药品医疗器械网络信息服务备案（京）网药械信息备字（2021）第00159号
+      医疗器械网络交易服务第三方平台备案凭证（京）网械平台备字（2020）第00002号
     </div>
   </footer>
   <aside>
