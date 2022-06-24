@@ -8,7 +8,7 @@ function move(obj, attr, target, speed, callback) {
       callback  回调函数，将会在动画执行完毕后执行
   */
   //    判断speed的正负
-  var current = parseInt(getComputedStyle(obj, null)[attr]);
+  let current = parseInt(getComputedStyle(obj, null)[attr]);
   if (current > target) {
       speed = -speed;
   }
@@ -16,8 +16,8 @@ function move(obj, attr, target, speed, callback) {
   // 开始前要关闭上一个计时器
   clearInterval(obj.time);
   obj.time = setInterval(function () {
-      var box1left = parseInt(getComputedStyle(obj, null)[attr]);
-      var newleft = box1left + speed;
+      let box1left = parseInt(getComputedStyle(obj, null)[attr]);
+      let newleft = box1left + speed;
       obj.style[attr] = newleft + "px";
       // 判断反向以及位置
       if (parseInt(newleft) >= target && speed > 0 || parseInt(newleft) < target && speed < 0) {

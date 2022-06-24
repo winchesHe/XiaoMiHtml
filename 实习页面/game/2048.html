@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,19 +14,23 @@
       list-style: none;
       text-decoration: none;
     }
+
     body {
       background-image: linear-gradient(#e66465, #9198e5);
     }
+
     .container {
       display: flex;
       justify-content: space-between;
       margin: 0 200px;
     }
+
     .left {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     .left-newgame {
       width: 100px;
       height: 45px;
@@ -38,10 +43,12 @@
       margin: 30px 0 30px 0;
       cursor: pointer;
     }
+
     .count {
       font-size: 30px;
       color: #8f7a66;
     }
+
     .right {
       width: 500px;
       height: 500px;
@@ -51,10 +58,12 @@
       border-radius: 15px;
       justify-content: space-evenly;
     }
+
     ul {
       display: flex;
       justify-content: space-evenly;
     }
+
     li {
       width: 100px;
       height: 100px;
@@ -65,6 +74,7 @@
       font-size: 35px;
       position: relative;
     }
+
     #btn {
       margin-top: 50px;
       width: 150px;
@@ -79,56 +89,101 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <div class="left">
       <div class="left-newgame">新游戏</div>
-      <div class="count">分数： 1252</div>
+      <div class="count">分数： <span id="resCount">2</span></div>
       <button id="btn">点击更换颜色</button>
     </div>
     <div class="right">
       <ul>
-        <li class="a"></li>
-        <li class="a"></li>
-        <li class="a"></li>
-        <li class="a"></li>
+        <li id="a1"></li>
+        <li id="a2"></li>
+        <li id="a3"></li>
+        <li id="a4"></li>
       </ul>
 
       <ul>
-        <li class="b"></li>
-        <li class="b"></li>
-        <li class="b"></li>
-        <li class="b"></li>
+        <li id="b1"></li>
+        <li id="b2"></li>
+        <li id="b3"></li>
+        <li id="b4"></li>
       </ul>
 
       <ul>
-        <li class="c"></li>
-        <li class="c"></li>
-        <li class="c"></li>
-        <li class="c"></li>
+        <li id="c1"></li>
+        <li id="c2"></li>
+        <li id="c3"></li>
+        <li id="c4"></li>
       </ul>
 
       <ul>
-        <li class="d"></li>
-        <li class="d">2</li>
-        <li class="d"></li>
-        <li class="d"></li>
+        <li id="d1"></li>
+        <li id="d2"></li>
+        <li id="d3"></li>
+        <li id="d4"></li>
       </ul>
     </div>
   </div>
 </body>
 <script>
-  // 上色函数
-  function Color(target){
-    r = Math.floor(Math.random()*255);
-    g = Math.floor(Math.random()*255);
-    b = Math.floor(Math.random()*255);
-    target.setAttribute('style', `background-image: linear-gradient(rgba(${r},${g},${b},0.8), rgba(${r*Math.random()},${g*Math.random()},${b*Math.random()},0.8));`)
-  };
-
+  // 定时移动的代码
+  function move(obj, attr, target, speed, callback) {
+    /*
+        obj    要移动的物体
+        attr  可以改变想要的参数 left  top  width  top  等等
+        target  要移动的位置
+        speed  移动的速度
+        callback  回调函数，将会在动画执行完毕后执行
+    */
+    //    判断speed的正负
+    let current = parseInt(getComputedStyle(obj, null)[attr]);
+    if (current > target) {
+      speed = -speed;
+    }
+    // 使用obj.time  来解决定将计时器定义到全局作用域中侮辱全局作用域变量的隐患
+    // 开始前要关闭上一个计时器
+    clearInterval(obj.time);
+    obj.time = setInterval(function () {
+      let box1left = parseInt(getComputedStyle(obj, null)[attr]);
+      let newleft = box1left + speed;
+      obj.style[attr] = newleft + "px";
+      // 判断反向以及位置
+      if (parseInt(newleft) >= target && speed > 0 || parseInt(newleft) < target && speed < 0) {
+        obj.style[attr] = target + "px";
+        clearInterval(obj.time);
+        // 动画结束后调用回调函数
+        // 如果传了callback就调用，没传就不调用
+        callback && callback();
+      }
+    }, 100);
+  }
+  //记录得分
+  let score = 0;
+  //将16个格子的id存储在二维数组a中
+  //记录上
+  let a = [['a1', 'a2', 'a3', 'a4'], ['b1', 'b2', 'b3', 'b4'], ['c1', 'c2', 'c3', 'c4'], ['d1', 'd2', 'd3', 'd4']];
+  //记录下
+  let b = [['d4', 'd3', 'd2', 'd1'], ['c4', 'c3', 'c2', 'c1'], ['b4', 'b3', 'b2', 'b1'], ['a4', 'a3', 'a2', 'a1']];
+  //记录左
+  let c = [['d1', 'c1', 'b1', 'a1'], ['d2', 'c2', 'b2', 'a2'], ['d3', 'c3', 'b3', 'a3'], ['d4', 'c4', 'b4', 'a4']];
+  //记录右
+  let d = [['a4', 'b4', 'c4', 'd4'], ['a3', 'b3', 'c3', 'd3'], ['a2', 'b2', 'c2', 'd2'], ['a1', 'b1', 'c1', 'd1']];
+  // 记录是否使用
+  let xx = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
   const liList = document.getElementsByTagName('li');
   const ranCount = [2, 4];
-  
+
+  // 上色函数
+  function Color(target) {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    target.setAttribute('style', `background-image: linear-gradient(rgba(${r},${g},${b},0.8), rgba(${r * Math.random()},${g * Math.random()},${b * Math.random()},0.8));`)
+  };
+
   // 随机添加小方块
   function randomAdd() {
     const randomList = [];
@@ -140,19 +195,183 @@
       };
       Color(item);
     };
-    // 当没有空标签时游戏结束
-    if (randomList.length === 0) {
-      alert('game over');
-    } else {
-      // 否则随机生成一个新的小方块
-      let item = randomList[Math.floor(Math.random()*randomList.length)];
-      item.innerText = ranCount[Math.floor(Math.random()*2)];
-      Color(item);
-    };
+    // 否则随机生成一个新的小方块
+    let item = randomList[Math.floor(Math.random() * randomList.length)];
+    item.innerText = ranCount[Math.floor(Math.random() * 2)];
+    Color(item);
   };
-  // 初始化游戏
-  randomAdd();
 
+  // 创建小方块
+  function createBox(target, num) {
+    target.innerText = num;
+    // for (let item of liList) {
+    //   if (!item.innerText) {
+    //     continue;
+    //   };
+    // Color(item);
+    // };
+  };
+
+  // 清空小方块
+  function qingkong(kuai_object) {
+    // kuai_object.style.backgroundColor="#ccc0b3";//空白时的颜色
+    kuai_object.setAttribute('style', 'background-image: none;')
+    kuai_object.innerHTML = "";//清空数字
+  };
+
+  // 更新分数
+  function update_score(num) {
+    document.getElementById("resCount").innerHTML = num;
+  }
+
+  function reset(two) {
+    return function () {
+      // two.style.visibility = 'hidden';
+      two.style.left = 0 + 'px';
+      two.style.top = 0 + 'px';
+      // two.style.display = 'none';
+    }
+  }
+
+  // 移动函数
+  function remove(x, y, n, type) {
+    n++;
+    if (x == 0) {
+      return remove(x + parseInt((y + 1) / 4), (y + 1) % 4, n, type);//
+    }
+    if (x > 3) {
+      return n;
+    } else {
+      let two = document.getElementById(type[x][y]);
+      let one = document.getElementById(type[x - 1][y]);
+      if (one.innerHTML == "" && two.innerHTML != "") {//第二行不空，第一行空
+        createBox(one, parseInt(two.innerHTML));
+        qingkong(two);
+        if (type === c) {
+          move(two, 'left', -120, 40, reset(two))
+        }
+        if (type === a) {
+          move(two, 'top', -120, 40, reset(two))
+        }
+        if (type === d) {
+          move(two, 'left', 120, 40, reset(two))
+        }
+        if (type === b) {
+          move(two, 'top', 120, 40, reset(two))
+        }
+        return remove(x - 1, y, n, type);
+      }
+      if (one.innerHTML != "" && two.innerHTML != "") {//两行都不等于空
+        if (one.innerHTML == two.innerHTML && xx[x - 1][y] == 0) {
+          xx[x - 1][y] = 1;
+          //score
+          score = score + 2 * two.innerHTML;
+          update_score(score);
+
+          createBox(one, 2 * two.innerHTML);
+          qingkong(two);
+          return remove(x + parseInt((y + 1) / 4), (y + 1) % 4, n, type);//
+        }
+      }
+    }
+    return remove(x + parseInt((y + 1) / 4), (y + 1) % 4, n, type);//
+  }
+
+  // 向左函数
+  function remove_zuo(x, y, n) {
+    return remove(x, y, n, c)
+  }
+  // 向上函数
+  function remove_shang(x, y, n) {
+    return remove(x, y, n, a)
+  }
+  // 向右函数
+  function remove_you(x, y, n) {
+    return remove(x, y, n, d)
+  }
+  // 向下函数
+  function remove_xia(x, y, n) {
+    return remove(x, y, n, b)
+  }
+  // 清空函数
+  function zero() {
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        xx[i][j] = 0;
+      }
+    }
+  }
+
+  // 检查是否还能继续
+  function check_over() {
+    let jieshu = 0;
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        if (document.getElementById(a[i][j]).innerHTML != "") {
+          jieshu = jieshu + 1;
+        }
+      }
+    }
+    if (jieshu == 16) {
+      alert("游戏结束!");
+    }
+  }
+
+  // 按键触发
+  function f_key() {
+    if (window.event.keyCode == 65 || window.event.keyCode == 37) {//左
+      let num = 0;
+      zero();
+      num = remove_zuo(0, 0, num)
+      if (num != 17) {
+        //随机生成小方块的条件是移动，且空
+        randomAdd();
+      } else {
+        check_over();
+      }
+    }
+    if (window.event.keyCode == 87 || window.event.keyCode == 38) {//上
+      let num = 0;
+      zero();
+      num = remove_shang(0, 0, num)
+      if (num != 17) {
+        //随机生成小方块的条件是移动，且空
+        randomAdd();
+      } else {
+        check_over();
+      }
+    }
+    if (window.event.keyCode == 68 || window.event.keyCode == 39) {//右
+      let num = 0;
+      zero();
+      num = remove_you(0, 0, num)
+      if (num != 17) {
+        //随机生成小方块的条件是移动，且空
+        randomAdd();
+      } else {
+        check_over();
+      }
+    }
+    if (window.event.keyCode == 83 || window.event.keyCode == 40) {//下	 
+      let num = 0;
+      zero();
+      num = remove_xia(0, 0, num)
+      if (num != 17) {
+        //随机生成小方块的条件是移动，且空
+        randomAdd();
+      } else {
+        check_over();
+      }
+    }
+  }
+</script>
+<script>
+  window.onload = () => {
+    // 初始化游戏
+    randomAdd();
+    // 按键时触发
+    document.onkeydown = f_key;
+  };
   // 点击按钮变色
   const btn = document.getElementById('btn');
   btn.addEventListener('click', () => {
@@ -161,52 +380,17 @@
       Color(item);
     };
   });
-
-  // 获取小方块矩阵
-  function getLiList(liList = []) {
-    liList.push(document.getElementsByClassName('a'));
-    liList.push(document.getElementsByClassName('b'));
-    liList.push(document.getElementsByClassName('c'));
-    liList.push(document.getElementsByClassName('d'));
-  };
-  function resetList({i, j, k, type, res}) {
-  };
-
-  // 向左移动函数
-  function moveLeft() {
-    const liList = [];
-    getLiList(liList);
-    const flagList = Array(liList.length).fill().map(item => Array(4).fill(false));
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 4; j++) {
-        if (liList[i][j].innerText !== '') {
-          flagList[i][j] = true;
-        }
-      };
+  const newGame = document.getElementsByClassName('left-newgame')[0];
+  newGame.addEventListener('click', () => {
+    for (let item of liList) {
+      item.innerText = '';
+      item.setAttribute('style', 'background-image: none;');
     };
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 4; j++) {
-        let target = 0;
-        let flag = false;
-        let res = 0;
-        if (liList[i][j].innerText !== '') {
-          for (var k = j - 1; k >= 0; k--) {
-            if (flagList[i][k]) {
-              target = (j - k) * 100;
-              flag = true;
-              res = flagList[i][k].innerText * liList[i][j].innerText
-              break;
-            }
-          }
-          if (!flag) target = j * 120;
-          move(liList[i][j], 'left', -target, 100, resetList({i, j, k, type: 'left', res}))
-        }
-      };
-    };
-    setTimeout(()=>{
-      randomAdd();
-    }, 100)
-  };
-  moveLeft()
+    const block = liList[Math.floor(Math.random() * liList.length)];
+    block.innerHTML = 2;
+    Color(block);
+    update_score(2);
+  });
 </script>
+
 </html>
