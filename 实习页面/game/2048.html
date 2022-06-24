@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="./utils/tools.js"></script>
   <style>
     * {
       margin: 0;
@@ -62,6 +63,7 @@
       line-height: 100px;
       text-align: center;
       font-size: 35px;
+      position: relative;
     }
     #btn {
       margin-top: 50px;
@@ -86,55 +88,72 @@
     </div>
     <div class="right">
       <ul>
-        <li class=""></li>
-        <li class=""></li>
-        <li class=""></li>
-        <li class=""></li>
+        <li class="a"></li>
+        <li class="a"></li>
+        <li class="a"></li>
+        <li class="a"></li>
       </ul>
 
       <ul>
-        <li class=""></li>
-        <li class=""></li>
-        <li class=""></li>
-        <li class=""></li>
+        <li class="b"></li>
+        <li class="b"></li>
+        <li class="b"></li>
+        <li class="b"></li>
       </ul>
 
       <ul>
-        <li class=""></li>
-        <li class=""></li>
-        <li class=""></li>
-        <li class=""></li>
+        <li class="c"></li>
+        <li class="c"></li>
+        <li class="c"></li>
+        <li class="c"></li>
       </ul>
 
       <ul>
-        <li class=""></li>
-        <li class="">2</li>
-        <li class=""></li>
-        <li class=""></li>
+        <li class="d"></li>
+        <li class="d">2</li>
+        <li class="d"></li>
+        <li class="d"></li>
       </ul>
     </div>
   </div>
 </body>
 <script>
+  // 上色函数
   function Color(target){
     r = Math.floor(Math.random()*255);
     g = Math.floor(Math.random()*255);
     b = Math.floor(Math.random()*255);
     target.setAttribute('style', `background-image: linear-gradient(rgba(${r},${g},${b},0.8), rgba(${r*Math.random()},${g*Math.random()},${b*Math.random()},0.8));`)
-  }
-  const liList = document.getElementsByTagName('li');
-  const randomList = [];
-  const ranCount = [2, 4]
-  for (let item of liList) {
-    if (!item.innerText) {
-      randomList.push(item)
-    };
-    Color(item);
   };
-  if (randomList.length === 0) {} 
-  else {
-    randomList[Math.floor(Math.random()*randomList.length)].innerText = ranCount[Math.floor(Math.random()*2)];
-  }
+
+  const liList = document.getElementsByTagName('li');
+  const ranCount = [2, 4];
+  
+  // 随机添加小方块
+  function randomAdd() {
+    const randomList = [];
+    // 循环遍历整个小方块
+    for (let item of liList) {
+      if (!item.innerText) {
+        randomList.push(item);
+        continue;
+      };
+      Color(item);
+    };
+    // 当没有空标签时游戏结束
+    if (randomList.length === 0) {
+      alert('game over');
+    } else {
+      // 否则随机生成一个新的小方块
+      let item = randomList[Math.floor(Math.random()*randomList.length)];
+      item.innerText = ranCount[Math.floor(Math.random()*2)];
+      Color(item);
+    };
+  };
+  // 初始化游戏
+  randomAdd();
+
+  // 点击按钮变色
   const btn = document.getElementById('btn');
   btn.addEventListener('click', () => {
     for (let item of liList) {
@@ -142,5 +161,52 @@
       Color(item);
     };
   });
+
+  // 获取小方块矩阵
+  function getLiList(liList = []) {
+    liList.push(document.getElementsByClassName('a'));
+    liList.push(document.getElementsByClassName('b'));
+    liList.push(document.getElementsByClassName('c'));
+    liList.push(document.getElementsByClassName('d'));
+  };
+  function resetList({i, j, k, type, res}) {
+  };
+
+  // 向左移动函数
+  function moveLeft() {
+    const liList = [];
+    getLiList(liList);
+    const flagList = Array(liList.length).fill().map(item => Array(4).fill(false));
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        if (liList[i][j].innerText !== '') {
+          flagList[i][j] = true;
+        }
+      };
+    };
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        let target = 0;
+        let flag = false;
+        let res = 0;
+        if (liList[i][j].innerText !== '') {
+          for (var k = j - 1; k >= 0; k--) {
+            if (flagList[i][k]) {
+              target = (j - k) * 100;
+              flag = true;
+              res = flagList[i][k].innerText * liList[i][j].innerText
+              break;
+            }
+          }
+          if (!flag) target = j * 120;
+          move(liList[i][j], 'left', -target, 100, resetList({i, j, k, type: 'left', res}))
+        }
+      };
+    };
+    setTimeout(()=>{
+      randomAdd();
+    }, 100)
+  };
+  moveLeft()
 </script>
 </html>
