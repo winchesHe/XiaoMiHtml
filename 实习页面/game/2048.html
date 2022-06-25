@@ -67,7 +67,7 @@
     li {
       width: 100px;
       height: 100px;
-      background-color: #ccc0b3;
+      /* background-color: #ccc0b3; */
       border-radius: 6px;
       line-height: 100px;
       text-align: center;
@@ -247,18 +247,18 @@
       if (one.innerHTML == "" && two.innerHTML != "") {//第二行不空，第一行空
         createBox(one, parseInt(two.innerHTML));
         qingkong(two);
-        if (type === c) {
-          move(two, 'left', -120, 40, reset(two))
-        }
-        if (type === a) {
-          move(two, 'top', -120, 40, reset(two))
-        }
-        if (type === d) {
-          move(two, 'left', 120, 40, reset(two))
-        }
-        if (type === b) {
-          move(two, 'top', 120, 40, reset(two))
-        }
+        // if (type === c) {
+        //   move(two, 'left', -120, 40, reset(two))
+        // }
+        // if (type === a) {
+        //   move(two, 'top', -120, 40, reset(two))
+        // }
+        // if (type === d) {
+        //   move(two, 'left', 120, 40, reset(two))
+        // }
+        // if (type === b) {
+        //   move(two, 'top', 120, 40, reset(two))
+        // }
         return remove(x - 1, y, n, type);
       }
       if (one.innerHTML != "" && two.innerHTML != "") {//两行都不等于空
@@ -270,11 +270,11 @@
 
           createBox(one, 2 * two.innerHTML);
           qingkong(two);
-          return remove(x + parseInt((y + 1) / 4), (y + 1) % 4, n, type);//
+          return remove(x + parseInt((y + 1) / 4), (y + 1) % 4, n, type);
         }
       }
     }
-    return remove(x + parseInt((y + 1) / 4), (y + 1) % 4, n, type);//
+    return remove(x + parseInt((y + 1) / 4), (y + 1) % 4, n, type);
   }
 
   // 向左函数

@@ -29,3 +29,27 @@ function move(obj, attr, target, speed, callback) {
       }
   }, 100);
 }
+
+// 定时移动的代码
+function animationMove(obj, target, callback) {
+    let start;
+  
+    function step(timestamp) {
+        if (start === undefined) {
+            start = timestamp;
+        }
+        const elapsed = timestamp - start;
+
+        //这里使用`Math.min()`确保元素刚好停在 200px 的位置。
+        obj.style.transform = 'translateX(' + Math.min(0.1 * elapsed, target) + 'px)';
+
+        if (elapsed < 1000) { // 在两秒后停止动画
+            window.requestAnimationFrame(step);
+        }
+        
+        // 动画结束后调用回调函数
+        // 如果传了callback就调用，没传就不调用
+        callback && callback();
+    }
+    window.requestAnimationFrame(step);
+}
